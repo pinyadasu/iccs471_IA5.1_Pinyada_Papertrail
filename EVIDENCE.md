@@ -15,7 +15,7 @@ These checks were written before implementation. Actual results will be recorded
 
 ## Two review decisions
 
-- Plan decision : [What I accepted or changed, and why. One or two sentences.]
+- Plan decision : When I checked Copilot's first plan, I noticed that there was no way to mark an item as completed. This would make it hard to test R3, which requires completed items to be excluded from the pending summary. So, I asked Copilot to add a `done` command and update R1. I also asked it to move the add and done logic from `cli.py` to `models.py` so I could test them separately.
 - Code decision : [File/function/component, what I accepted or changed, and why. One or two sentences.]
 
 ## Automated tests
