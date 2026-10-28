@@ -17,7 +17,7 @@ PaperTrail is a command-line tool for people who need to keep track of personal 
 - Prerequisites : Python 3.12. No external Python packages are required.
 - Setup : Clone the repository. No packages to install.
 - Run : 
-- Run tests : python -m unittest discover -s tests -v
+- Run tests : `python3 -m unittest discover -s tests -v`
 
 ## Author and acknowledgements
 

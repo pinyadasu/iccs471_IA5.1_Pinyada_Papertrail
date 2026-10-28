@@ -16,7 +16,7 @@
 4. Create `papertrail/cli.py` with commands to add, list, show the pending summary, and mark an item done. It only reads input, calls the other modules, and displays results or errors. Check manually, including invalid input.
 **Covers: R1, R2, R3.**
 
-5. Turn C1 and C2 from `EVIDENCE.md` into automated tests and run `python -m unittest discover -s tests -v`. Then perform a realistic run by adding two documents, marking one done, and checking summary order and exclusion.
+5. Turn C1 and C2 from `EVIDENCE.md` into automated tests and run `python3 -m unittest discover -s tests -v`. Then perform a realistic run by adding two documents, marking one done, and checking summary order and exclusion.
 **Covers: R1, R2, R3.**
 
 ## Later changes, if any
