@@ -1,49 +1,13 @@
+# Instructions for this repository
 
-# Instructions for GitHub Copilot
+> This file tells the coding agent how to work on this project. It does not replace the requirements or plan.
 
-## Before Making Changes
-
-- Read `README.md`, `PLAN.md`, and `EVIDENCE.md` before working.
-- Follow the requirements R1, R2, and R3 in `README.md`.
-- If a requirement or design decision is unclear, ask before making a major change.
-
-## Project Scope
-
-- Build a small Python command-line application called PaperTrail.
-- Use JSON for local data storage.
-- Keep the implementation simple and suitable for a small student project.
-- Do not add a web interface, database server, login system, external API, or unrelated features.
-- Do not add external dependencies unless necessary and approved.
-
-## Code Quality
-
-- Use clear function and variable names.
-- Separate deadline and validation logic from command-line input/output where practical.
-- Handle invalid user input without crashing.
-- Keep changes small and focused.
-- Avoid unnecessary abstractions and duplicated code.
-
-## Testing
-
-- Use Python's built-in `unittest` framework.
-- Run the relevant tests after each implementation step.
-- Run the full test suite before reporting the task as complete.
-- Do not change expected test results just to make the implementation pass.
-- Include tests for deadline classification and invalid input.
-
-## Student Review
-
-- Explain the purpose of important code changes.
-- Identify assumptions and limitations.
-- Do not decide the student's final evaluation or write personal reflections on their behalf.
-- Do not change the requirements or expected results recorded by the student without asking.
-- Do not claim a test passed unless it was actually run and passed.
-
-## Final Report
-
-After making changes, report:
-- Files changed
-- Features implemented
-- Tests run and their actual results
-- Known limitations
-- Any unfinished requirements
+- Read `README.md`, `PLAN.md`, and the checks recorded in `EVIDENCE.md` before implementing changes. If `PLAN.md` does not exist yet, help propose a plan first.
+- Keep changes within the three requirements (R1, R2, and R3) in `README.md`.
+- Use Python 3.12 and the built-in `unittest` framework. Store local data in JSON without adding unnecessary external dependencies.
+- Keep deadline classification and input validation separate from command-line input/output where practical.
+- Run tests with: `python -m unittest discover -s tests -v`
+- Do not change expected results merely to make a test pass. Raise disagreements for review.
+- Leave requirements, expected results, decision notes, and the final judgment for the student to write or approve.
+- Before implementation, propose a short plan and explain how each step will be checked. Wait for the student's approval before making implementation changes.
+- After implementation, report changed files, completed features, actual test results, known limitations, and unfinished requirements.
