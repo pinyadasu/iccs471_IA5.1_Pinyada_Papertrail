@@ -1,7 +1,10 @@
 import unittest
 from datetime import date
+from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from papertrail.models import add_item, mark_done, parse_due_date
+from papertrail.storage import save_items
 
 
 class AddItemTests(unittest.TestCase):
@@ -38,6 +41,17 @@ class AddItemTests(unittest.TestCase):
     def test_add_item_rejects_missing_name(self):
         with self.assertRaisesRegex(ValueError, "name is required"):
             add_item([], "   ", "2026-10-30")
+
+    def test_c2_empty_name_is_rejected_without_changing_or_saving(self):
+        items = []
+        with TemporaryDirectory() as temporary_directory:
+            path = Path(temporary_directory) / "items.json"
+
+            with self.assertRaisesRegex(ValueError, "name is required"):
+                save_items(path, add_item(items, "", "2026-10-30"))
+
+            self.assertEqual(items, [])
+            self.assertFalse(path.exists())
 
     def test_add_item_rejects_invalid_date(self):
         with self.assertRaisesRegex(ValueError, "due_date"):
@@ -111,6 +125,10 @@ class DateParsingTests(unittest.TestCase):
     def test_parse_due_date_rejects_non_iso_format(self):
         with self.assertRaisesRegex(ValueError, "YYYY-MM-DD"):
             parse_due_date("30-10-2026")
+
+    def test_parse_due_date_rejects_compact_date(self):
+        with self.assertRaisesRegex(ValueError, "YYYY-MM-DD"):
+            parse_due_date("20261030")
 
 
 if __name__ == "__main__":
