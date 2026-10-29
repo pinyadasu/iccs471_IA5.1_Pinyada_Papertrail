@@ -4,6 +4,8 @@ import unittest
 from datetime import date
 from pathlib import Path
 
+from papertrail.deadlines import pending_summary
+from papertrail.models import add_item, mark_done
 from papertrail.storage import StorageError, load_items, save_items
 
 
@@ -41,6 +43,28 @@ class StorageTests(unittest.TestCase):
         self.assertEqual(stored_data[0]["due_date"], "2026-10-31")
         self.assertEqual(load_items(self.path), self.items)
         self.assertIsInstance(load_items(self.path)[0]["due_date"], date)
+
+    def test_c1_added_item_is_saved_and_due_soon(self):
+        today = date(2026, 10, 29)
+        items = add_item([], "Passport renewal", date(2026, 10, 31))
+
+        save_items(self.path, items)
+        loaded_items = load_items(self.path)
+        summary = pending_summary(loaded_items, today)
+
+        self.assertEqual(
+            summary,
+            [
+                {
+                    "name": "Passport renewal",
+                    "due_date": date(2026, 10, 31),
+                    "status": "pending",
+                    "next_action": "",
+                    "category": "due soon",
+                }
+            ],
+        )
+        self.assertEqual(loaded_items, items)
 
     def test_save_creates_missing_parent_directory(self):
         nested_path = Path(self.temp_dir.name) / "data" / "items.json"
@@ -171,6 +195,19 @@ class StorageTests(unittest.TestCase):
 
         self.assertFalse(nested_directory.exists())
         self.assertFalse(nested_path.exists())
+
+    def test_done_item_saved_and_reloaded_is_absent_from_pending_summary(self):
+        items = add_item([], "Passport renewal", date(2026, 10, 31))
+        completed_items = mark_done(items, "passport renewal")
+
+        save_items(self.path, completed_items)
+        loaded_items = load_items(self.path)
+
+        self.assertEqual(loaded_items[0]["status"], "completed")
+        self.assertEqual(
+            pending_summary(loaded_items, date(2026, 10, 29)),
+            [],
+        )
 
 
 if __name__ == "__main__":
