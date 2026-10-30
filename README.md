@@ -16,13 +16,13 @@ PaperTrail is a command-line tool for people who need to keep track of personal 
 
 - Prerequisites : Python 3.12. No external Python packages are required.
 - Setup : Clone the repository. No packages to install.
-- Run : 
+- Run : From the repository root, run `python3 -m papertrail.cli add "Passport renewal" 2026-10-31 --next-action "Collect documents"`, then use `list`, `summary`, or `done "Passport renewal"`. Data is saved in `data/items.json`.
 - Run tests : `python3 -m unittest discover -s tests -v`
 
 ## Author and acknowledgements
 
 - Name / student ID : Pinyada Suthisopha-aphorn 6580511
-- AI tools used : GitHub Copilot
+- AI tools used : GitHub Copilot (planning and implementation), Chatgpt (reviewing drafts)
 - External code/resources : [Python official documentation](https://docs.python.org/3/), used as a reference for Python development.
 
 See PLAN.md for the implementation plan and EVIDENCE.md for results and decisions.
